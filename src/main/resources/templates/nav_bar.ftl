@@ -15,10 +15,10 @@
             <ul class="nav navbar-nav navbar-right">
             <#if !user??>
                 <li>
-                    <a href="#"><@spring.message "login_msg" /></a>
+                    <a href="/user/login"><@spring.message "login_msg" /></a>
                 </li>
                 <li>
-                    <a href="#"><@spring.message "register_msg" /></a>
+                    <a href="/user/create"><@spring.message "register_msg" /></a>
                 </li>
             <#else >
                 <li class="disabled">
@@ -59,10 +59,10 @@
                         <ul class="list-inline intro-social-buttons">
                             <#if !user??>
                                 <li>
-                                    <a href="#" class="btn btn-default btn-lg"><i class="fa fa-user"></i><@spring.message "login_msg" /></a>
+                                    <a href="/user/login" class="btn btn-default btn-lg"><i class="fa fa-user"></i><@spring.message "login_msg" /></a>
                                 </li>
                                 <li>
-                                    <a href="#" class="btn btn-default btn-lg"><i class="fa fa-check"></i><@spring.message "register_msg" /></a>
+                                    <a href="/user/create" class="btn btn-default btn-lg"><i class="fa fa-check"></i><@spring.message "register_msg" /></a>
                                 </li>
                             </#if>
                         </ul>

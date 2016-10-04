@@ -13,11 +13,11 @@
                     </li>
                 <#else>
                     <li>
-                        <a href="#"><@spring.message "login_msg" /></a>
+                        <a href="/user/login"><@spring.message "login_msg" /></a>
                     </li>
                     <li class="footer-menu-divider">&sdot;</li>
                     <li>
-                        <a href="#"><@spring.message "register_msg" /></a>
+                        <a href="/user/create"><@spring.message "register_msg" /></a>
                     </li>
                     <li class="footer-menu-divider">&sdot;</li>
                     <li>
