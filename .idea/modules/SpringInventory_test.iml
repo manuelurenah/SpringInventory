@@ -19,7 +19,8 @@
     <orderEntry type="library" name="Gradle: com.h2database:h2:1.4.192" level="project" />
     <orderEntry type="library" name="Gradle: org.webjars:bootstrap:3.3.7-1" level="project" />
     <orderEntry type="library" name="Gradle: org.webjars:jquery:3.1.0" level="project" />
-    <orderEntry type="library" name="Gradle: org.webjars:materializecss:0.97.7" level="project" />
+    <orderEntry type="library" name="Gradle: org.webjars:font-awesome:4.6.3" level="project" />
+    <orderEntry type="library" name="Gradle: org.webjars:datatables:1.10.12" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-starter-test:1.4.1.RELEASE" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-starter:1.4.1.RELEASE" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-actuator:1.4.1.RELEASE" level="project" />

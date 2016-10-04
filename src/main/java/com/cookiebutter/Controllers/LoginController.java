@@ -15,8 +15,9 @@ public class LoginController {
 
     @RequestMapping("/")
     public String login(@RequestParam(value = "name", required = false, defaultValue = "World") String name, Model model) {
+        model.addAttribute("template_name", "login.ftl");
         model.addAttribute("name", name);
-        return "login";
+        return "header_footer";
     }
 
 }
