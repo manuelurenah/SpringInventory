@@ -11,8 +11,9 @@
     </#if>
     <div class="row">
         <div class="col-xs-12">
-            <form action="#" method="post" role="form">
+            <form method="post" role="form">
                 <#--<legend><@spring.message "user_register_title" /></legend>-->
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 <br>
                 <div class="col-xs-6">
                     <div class="form-group">
@@ -35,7 +36,7 @@
                 <div class="col-xs-6">
                     <div class="form-group">
                         <label for="password_2"><@spring.message "user_form_confirm_msg" /> <@spring.message "user_form_password_msg" /></label>
-                        <input required type="password" class="form-control" name="password_2" id="password_2" placeholder="">
+                        <input required type="password" class="form-control" name="retypePassword" id="password_2" placeholder="">
                     </div>
                 </div>
                 <div class="col-xs-6">

@@ -1,6 +1,9 @@
 package com.cookiebutter.Models;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -17,12 +20,20 @@ public class User implements Serializable {
     @GeneratedValue
     private long id;
     @Column
+    @NotNull
+    @Min(4)
     private String username;
     @Column
+    @NotNull
+    @Size(min=6, max=30)
     private String password;
     @Column
+    @NotNull
+    @Size(min=6, max=30)
     private String name;
     @Column
+    @NotNull
+    @Size(min=6, max=30)
     private String lastName;
     @Column
     private Date birthDate;
@@ -30,6 +41,9 @@ public class User implements Serializable {
     private boolean enabled;
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<UserRoles> roles = new ArrayList<>();
+    @NotNull
+    @Size(min=6, max=30)
+    private String retypePassword;
 
 
     public User(){};
@@ -104,5 +118,13 @@ public class User implements Serializable {
 
     public void setRoles(List<UserRoles> roles) {
         this.roles = roles;
+    }
+
+    public String getRetypePassword() {
+        return retypePassword;
+    }
+
+    public void setRetypePassword(String retypePassword) {
+        this.retypePassword = retypePassword;
     }
 }

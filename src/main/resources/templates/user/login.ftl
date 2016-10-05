@@ -11,8 +11,9 @@
 </#if>
     <div class="row">
         <div class="col-xs-12">
-            <form action="#" method="post" role="form">
+            <form action="/user/login" method="post" role="form">
                 <#--<legend><@spring.message "user_login_title" /></legend>-->
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
                 <div class="form-group">
                     <label for="username"><i class="fa fa-user"></i> <@spring.message "user_form_username_msg" /></label>
