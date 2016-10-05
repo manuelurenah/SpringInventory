@@ -29,7 +29,7 @@ public class HomeController {
     @PreAuthorize("hasRole('ROLE_USER')")
     public String some(Model model) {
         model.addAttribute("template_name", "index.ftl");
-        return BASE_LAYOUT;
+        return Constants.BASE_LAYOUT;
     }
 
 }
