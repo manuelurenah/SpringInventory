@@ -1,5 +1,6 @@
 package com.cookiebutter.Controllers;
 
+import com.cookiebutter.Models.Constants;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,12 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HomeController {
 
-    public static final String BASE_LAYOUT = "header_footer";
-
     @RequestMapping("/")
     public String index(Model model) {
         model.addAttribute("template_name", "index.ftl");
-        return BASE_LAYOUT;
+        return Constants.BASE_LAYOUT;
     }
 
 }

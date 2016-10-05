@@ -12,6 +12,11 @@
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav nav-bar navbar-left">
+                <li>
+                    <a href="/article/add"><@spring.message "articles_msg" /></a>
+                </li>
+            </ul>
             <ul class="nav navbar-nav navbar-right">
             <#if !user??>
                 <li>
