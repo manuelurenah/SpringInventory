@@ -3,6 +3,7 @@ package com.cookiebutter.Components;
 import com.cookiebutter.Models.User;
 import com.cookiebutter.Models.UserRoles;
 import com.cookiebutter.Repositories.UserRolesRepository;
+import com.cookiebutter.Services.UserRolesService;
 import com.cookiebutter.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
@@ -20,7 +21,7 @@ public class InitialSetup implements ApplicationListener<ContextRefreshedEvent> 
     @Autowired
     UserService userService;
     @Autowired
-    UserRolesRepository userRolesRepository;
+    UserRolesService userRolesService;
 
     @Override
     @Transactional
@@ -37,12 +38,13 @@ public class InitialSetup implements ApplicationListener<ContextRefreshedEvent> 
             admin.setName("Administrator");
             admin.setLastName("Administrator");
 
-            admin = userService.create(admin);
-
             UserRoles adminRole = new UserRoles();
-            adminRole.setRole("ADMIN");
+            adminRole.setRole("ROLE_ADMIN");
+            admin.getRoles().add(adminRole);
             adminRole.setUser(admin);
-            userRolesRepository.save(adminRole);
+
+            admin = userService.create(admin);
+            adminRole = userRolesService.create(adminRole);
         }
 
         alreadySetup = true;

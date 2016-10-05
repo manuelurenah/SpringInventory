@@ -21,7 +21,7 @@ public class CustomUserDetails extends User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<String> userRoles = super.getRoles().parallelStream().map(ur -> ur.getRole()).collect(Collectors.toList());
+        List<String> userRoles = this.getRoles().parallelStream().map(ur -> ur.getRole()).collect(Collectors.toList());
         String roles = StringUtils.collectionToCommaDelimitedString(userRoles);
         return AuthorityUtils.commaSeparatedStringToAuthorityList(roles);
     }

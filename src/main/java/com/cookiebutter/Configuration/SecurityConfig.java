@@ -18,7 +18,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
  * Created by luis on 04/10/16.
  */
 @Configurable
-@EnableGlobalMethodSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableWebMvc
 @ComponentScan(basePackageClasses = CustomUserDetailService.class)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -41,14 +41,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .usernameParameter("username")
                     .passwordParameter("password")
                     .failureUrl("/user/login?error")
-                    .defaultSuccessUrl("/someothersite")
                     .permitAll()
                 .and()
                 .logout()
                     .logoutSuccessUrl("/user/login?logout")
                     .permitAll()
                 .and()
-                .exceptionHandling().accessDeniedPage("/auth_required")
+                .exceptionHandling()
+                .accessDeniedPage("/unauthorized")
                 .and()
                 .csrf();
     }

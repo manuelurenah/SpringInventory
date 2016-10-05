@@ -41,8 +41,8 @@ public class User implements Serializable {
     private Date birthDate;
     @Column
     private boolean enabled = true;
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
-    private List<UserRoles> roles = new ArrayList<>();
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<UserRoles> roles = new ArrayList<UserRoles>();
     @NotNull
     @Size(min=5, max=30)
     private String retypePassword;
@@ -60,6 +60,7 @@ public class User implements Serializable {
         this.lastName = user.getLastName();
         this.birthDate = user.getBirthDate();
         this.admin = user.isAdmin();
+        this.roles = user.getRoles();
     }
 
     public long getId() {

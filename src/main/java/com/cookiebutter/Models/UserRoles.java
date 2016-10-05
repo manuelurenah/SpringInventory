@@ -10,19 +10,19 @@ import javax.persistence.*;
 public class UserRoles {
     @Id
     @GeneratedValue
-    @Column(name="user_role_id")
-    private long userroleid;
-    @ManyToOne()
+    @Column(name="id")
+    private long id;
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private User user;
     @Column
     private String role;
 
     public long getUserroleid() {
-        return userroleid;
+        return id;
     }
 
     public void setUserroleid(long userroleid) {
-        this.userroleid = userroleid;
+        this.id = userroleid;
     }
 
     public User getUser() {

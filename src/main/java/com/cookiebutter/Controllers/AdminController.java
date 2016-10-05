@@ -1,6 +1,7 @@
 package com.cookiebutter.Controllers;
 
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -10,11 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
-
+    @RequestMapping("/")
+    @Secured({"ADMIN"})
     public String index() {
         return "Hello there!";
     }
-    @Secured({"ADMIN"})
     @RequestMapping("/user/create")
     public String addUserForm() {
         return "Add me now :)";
