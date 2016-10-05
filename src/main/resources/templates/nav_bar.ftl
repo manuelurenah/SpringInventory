@@ -28,7 +28,7 @@
                     <a href="#"><@spring.message "profile_msg" /></a>
                 </li>
 
-                <#if user.getAdmin()>
+                <#if user.isAdmin()>
                     <li>
                         <a href="#">Admin</a>
                     </li>

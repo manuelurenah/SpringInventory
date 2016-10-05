@@ -1,5 +1,7 @@
 package com.cookiebutter.Models;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -21,29 +23,32 @@ public class User implements Serializable {
     private long id;
     @Column
     @NotNull
-    @Min(4)
+    @Size(min = 4, message = "{user.username_too_short}")
     private String username;
     @Column
     @NotNull
-    @Size(min=6, max=30)
+    @Size(min=5, max=30)
     private String password;
     @Column
     @NotNull
-    @Size(min=6, max=30)
+    @Size(min=5, max=30)
     private String name;
     @Column
     @NotNull
-    @Size(min=6, max=30)
+    @Size(min=5, max=30)
     private String lastName;
     @Column
     private Date birthDate;
     @Column
-    private boolean enabled;
+    private boolean enabled = true;
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<UserRoles> roles = new ArrayList<>();
     @NotNull
-    @Size(min=6, max=30)
+    @Size(min=5, max=30)
     private String retypePassword;
+
+    @Column
+    private boolean admin = false;
 
 
     public User(){};
@@ -54,6 +59,7 @@ public class User implements Serializable {
         this.name = user.getName();
         this.lastName = user.getLastName();
         this.birthDate = user.getBirthDate();
+        this.admin = user.isAdmin();
     }
 
     public long getId() {
@@ -126,5 +132,18 @@ public class User implements Serializable {
 
     public void setRetypePassword(String retypePassword) {
         this.retypePassword = retypePassword;
+    }
+
+    public boolean isAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
+    }
+
+    @Override
+    public String toString() {
+        return username;
     }
 }

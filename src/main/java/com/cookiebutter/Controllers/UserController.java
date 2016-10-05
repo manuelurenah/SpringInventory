@@ -31,13 +31,13 @@ public class UserController {
     }
 
     @GetMapping("/create")
-    public String createForm(Model model) {
+    public String createForm(@ModelAttribute(name = "newUser") User user, Model model) {
         model.addAttribute("template_name", "user/register.ftl");
         return BASE_LAYOUT;
     }
     @PostMapping("/create")
-    public String create(@Valid @ModelAttribute User user,
-                         BindingResult bindingResult,
+    public String create(@Valid @ModelAttribute(name = "newUser") User user,
+                         @Valid BindingResult bindingResult,
                          Model model) {
         if(bindingResult.hasErrors()){
             model.addAttribute("template_name", "user/register.ftl");

@@ -33,7 +33,10 @@ public class InitialSetup implements ApplicationListener<ContextRefreshedEvent> 
             User admin = new User();
             admin.setUsername("admin");
             admin.setPassword("admin");
+            admin.setRetypePassword("admin");
             admin.setName("Administrator");
+            admin.setLastName("Administrator");
+
             admin = userService.create(admin);
 
             UserRoles adminRole = new UserRoles();

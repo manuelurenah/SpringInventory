@@ -18,7 +18,12 @@
                 <div class="col-xs-6">
                     <div class="form-group">
                         <label for="username"><i class="fa fa-user"></i> <@spring.message "user_form_username_msg" /></label>
+                        <@spring.bind 'newUser.username'/>
                         <input required type="text" class="form-control" name="username" id="username" placeholder="">
+                        <#list spring.status.errorMessages as error>
+                            <span class="error">${error}</span>
+                            <br>
+                        </#list>
                     </div>
                 </div>
                 <div class="col-xs-6">
