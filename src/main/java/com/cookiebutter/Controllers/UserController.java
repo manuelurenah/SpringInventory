@@ -58,7 +58,7 @@ public class UserController {
         else {
             if(!userService.exists(user.getUsername())) {
                 UserRoles userRole = new UserRoles();
-                userRole.setRole("USER");
+                userRole.setRole("ROLE_USER");
                 userRole.setUser(user);
                 user.getRoles().add(userRole);
                 userService.create(user);
