@@ -1,6 +1,9 @@
 package com.cookiebutter.Controllers;
 
 import com.cookiebutter.Models.User;
+import com.cookiebutter.Repositories.UserRepository;
+import com.cookiebutter.Services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,6 +22,8 @@ import java.util.Optional;
 public class UserController {
 
     public static final String BASE_LAYOUT = "header_footer";
+    @Autowired
+    private UserService userService;
 
     @RequestMapping("/login")
     public String login(@RequestParam Optional<String> error,
@@ -39,11 +44,21 @@ public class UserController {
     public String create(@Valid @ModelAttribute(name = "newUser") User user,
                          @Valid BindingResult bindingResult,
                          Model model) {
-        if(bindingResult.hasErrors()){
+        if(bindingResult.hasErrors()) {
             model.addAttribute("template_name", "user/register.ftl");
             return BASE_LAYOUT;
         }
-        return "";
+        else {
+            if(!userService.exists(user.getUsername())) {
+                userService.create(user);
+                return "redirect:/";
+            }
+            else {
+                model.addAttribute("errors", "Username already exists.");
+                model.addAttribute("template_name", "user/register.ftl");
+                return BASE_LAYOUT;
+            }
+        }
     }
 
 }

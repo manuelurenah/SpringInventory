@@ -22,7 +22,7 @@ public class User implements Serializable {
     @GeneratedValue
     private long id;
     @Column
-    @NotNull
+    @NotNull(message = "{user.username_not_empty}")
     @Size(min = 4, message = "{user.username_too_short}")
     private String username;
     @Column
