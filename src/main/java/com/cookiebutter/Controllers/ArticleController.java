@@ -1,0 +1,55 @@
+package com.cookiebutter.Controllers;
+
+import com.cookiebutter.Models.Article;
+import com.cookiebutter.Models.Constants;
+import com.cookiebutter.Services.ArticleService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.validation.Valid;
+
+/**
+ * Created by MEUrena on 10/4/16.
+ * All rights reserved.
+ */
+@Controller
+@RequestMapping("/article")
+public class ArticleController {
+
+    @Autowired
+    ArticleService articleService;
+
+    @GetMapping("/add")
+    public String addArticle(@ModelAttribute(name = "newArticle") Article article, Model model) {
+        model.addAttribute("template_name", "article/add.ftl");
+
+        return Constants.BASE_LAYOUT;
+    }
+
+    @PostMapping("/add")
+    public String create(@Valid @ModelAttribute(name = "newArticle") Article article,
+                         @Valid BindingResult bindingResult,
+                         Model model) {
+        if(bindingResult.hasErrors()) {
+            model.addAttribute("template_name", "article/add.ftl");
+            return Constants.BASE_LAYOUT;
+        }
+        else {
+            if(!articleService.exists(article.getName())) {
+                articleService.create(article);
+                return "redirect:/";
+            }
+            else {
+                model.addAttribute("errors", "Article already exists.");
+                model.addAttribute("template_name", "article/add.ftl");
+                return Constants.BASE_LAYOUT;
+            }
+        }
+    }
+}

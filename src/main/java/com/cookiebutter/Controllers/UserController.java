@@ -1,5 +1,6 @@
 package com.cookiebutter.Controllers;
 
+import com.cookiebutter.Models.Constants;
 import com.cookiebutter.Models.CustomUserDetails;
 import com.cookiebutter.Models.User;
 import com.cookiebutter.Models.UserRoles;
@@ -26,7 +27,6 @@ import java.util.Optional;
 @RequestMapping("/user")
 public class UserController {
 
-    public static final String BASE_LAYOUT = "header_footer";
     @Autowired
     private UserService userService;
     @Autowired
@@ -39,13 +39,13 @@ public class UserController {
         model.addAttribute("error", error);
         model.addAttribute("logout", logout);
         model.addAttribute("template_name", "user/login.ftl");
-        return BASE_LAYOUT;
+        return Constants.BASE_LAYOUT;
     }
 
     @GetMapping("/create")
     public String createForm(@ModelAttribute(name = "newUser") User user, Model model) {
         model.addAttribute("template_name", "user/register.ftl");
-        return BASE_LAYOUT;
+        return Constants.BASE_LAYOUT;
     }
     @PostMapping("/create")
     public String create(@Valid @ModelAttribute(name = "newUser") User user,
@@ -53,7 +53,7 @@ public class UserController {
                          Model model) {
         if(bindingResult.hasErrors()) {
             model.addAttribute("template_name", "user/register.ftl");
-            return BASE_LAYOUT;
+            return Constants.BASE_LAYOUT;
         }
         else {
             if(!userService.exists(user.getUsername())) {
@@ -70,7 +70,7 @@ public class UserController {
             else {
                 model.addAttribute("errors", "Username already exists.");
                 model.addAttribute("template_name", "user/register.ftl");
-                return BASE_LAYOUT;
+                return Constants.BASE_LAYOUT;
             }
         }
     }
