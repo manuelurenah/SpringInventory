@@ -6,8 +6,8 @@
     <title>Spring Inventory</title>
     <link rel="stylesheet" href="/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="/webjars/font-awesome/4.6.3/css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="/webjars/datatables/1.10.12/css/dataTables.bootstrap.min.css" type="text/css"
-    <link rel="stylesheet" href="/css/landing-page.css" type="text/css"
+    <link rel="stylesheet" href="/webjars/datatables/1.10.12/css/dataTables.bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/landing-page.css" type="text/css">
     <link rel="stylesheet" href="/css/custom.css" type="text/css">
 </head>
 <body>
