@@ -1,6 +1,7 @@
 package com.cookiebutter.Models;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 /**
  * Created by luis on 04/10/16.
@@ -15,6 +16,7 @@ public class UserRoles {
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private User user;
     @Column
+    @NotNull
     private String role;
 
     public long getUserroleid() {

@@ -8,6 +8,8 @@ import com.cookiebutter.Repositories.UserRepository;
 import com.cookiebutter.Services.UserRolesService;
 import com.cookiebutter.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -16,6 +18,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.Optional;
 
 /**
@@ -25,6 +28,7 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping("/user")
+@SessionAttributes("currentUser")
 public class UserController {
 
     @Autowired
@@ -35,7 +39,15 @@ public class UserController {
     @RequestMapping("/login")
     public String login(@RequestParam Optional<String> error,
                         @RequestParam Optional<String> logout,
+                        Principal principal,
                         Model model) {
+        if(principal != null) {
+            if(!model.containsAttribute("currentUser")) {
+                User user = userService.findByUsername(principal.getName());
+                model.addAttribute("currentUser", user);
+            }
+            return "redirect:/";
+        }
         model.addAttribute("error", error);
         model.addAttribute("logout", logout);
         model.addAttribute("template_name", "user/login.ftl");
@@ -65,6 +77,7 @@ public class UserController {
                 userRolesService.create(userRole);
                 UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(new CustomUserDetails(user), null);
                 SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
+
                 return "redirect:/";
             }
             else {
@@ -73,6 +86,16 @@ public class UserController {
                 return Constants.BASE_LAYOUT;
             }
         }
+    }
+
+    @GetMapping("/view/{username}")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public String view(@PathVariable String username,
+                       Model model) {
+        User user = userService.findByUsername(username);
+        model.addAttribute("user",user);
+        model.addAttribute("template_name", "user/view.ftl");
+        return Constants.BASE_LAYOUT;
     }
 
 }

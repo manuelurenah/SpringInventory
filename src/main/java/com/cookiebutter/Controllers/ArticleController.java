@@ -4,6 +4,8 @@ import com.cookiebutter.Models.Article;
 import com.cookiebutter.Models.Constants;
 import com.cookiebutter.Services.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,6 +28,7 @@ public class ArticleController {
     ArticleService articleService;
 
     @GetMapping("/add")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public String addArticle(@ModelAttribute(name = "newArticle") Article article, Model model) {
         model.addAttribute("template_name", "article/add.ftl");
 

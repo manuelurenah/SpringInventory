@@ -18,7 +18,7 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-            <#if !user??>
+            <#if !currentUser??>
                 <li>
                     <a href="/user/login"><@spring.message "login_msg" /></a>
                 </li>
@@ -27,15 +27,15 @@
                 </li>
             <#else >
                 <li class="disabled">
-                    <a href="#">${user}</a>
+                    <a href="#">${currentUser}</a>
                 </li>
                 <li>
-                    <a href="#"><@spring.message "profile_msg" /></a>
+                    <a href="/user/view/${currentUser}"><@spring.message "profile_msg" /></a>
                 </li>
 
-                <#if user.isAdmin()>
+                <#if currentUser.hasRole("ROLE_ADMIN")>
                     <li>
-                        <a href="#">Admin</a>
+                        <a href="/admin/">Admin</a>
                     </li>
                 </#if>
                 <li>
@@ -62,7 +62,7 @@
                         <h3><@spring.message "header_subtitle_message" /></h3>
                         <hr class="intro-divider">
                         <ul class="list-inline intro-social-buttons">
-                            <#if !user??>
+                            <#if !currentUser??>
                                 <li>
                                     <a href="/user/login" class="btn btn-default btn-lg"><i class="fa fa-user"></i><@spring.message "login_msg" /></a>
                                 </li>

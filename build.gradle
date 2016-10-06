@@ -33,7 +33,10 @@ dependencies {
     compile("org.springframework.boot:spring-boot-devtools")
     compile('org.springframework.boot:spring-boot-starter-web')
     //Incluyendo el módulo de seguridad.
+
+    compile group: 'org.springframework.security', name: 'spring-security-taglibs'
     compile('org.springframework.boot:spring-boot-starter-security')
+
 
     //Trabajando con FreeMarker...
     compile('org.springframework.boot:spring-boot-starter-freemarker')
@@ -46,6 +49,12 @@ dependencies {
     compile 'org.webjars:jquery:3.1.0'
     compile 'org.webjars:font-awesome:4.6.3'
     compile 'org.webjars:datatables:1.10.12'
+// https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.4'
+// https://mvnrepository.com/artifact/javax.servlet.jsp/jsp-api
+    compile group: 'javax.servlet.jsp', name: 'jsp-api', version: '2.2.1-b03'
+
+
 
 
     //Prueba.

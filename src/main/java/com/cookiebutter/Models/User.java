@@ -35,6 +35,9 @@ public class User implements Serializable {
     private String name;
     @Column
     @NotNull
+    private String email;
+    @Column
+    @NotNull
     @Size(min=5, max=30)
     private String lastName;
     @Column
@@ -61,6 +64,7 @@ public class User implements Serializable {
         this.birthDate = user.getBirthDate();
         this.admin = user.isAdmin();
         this.roles = user.getRoles();
+        this.email = user.getEmail();
     }
 
     public long getId() {
@@ -146,5 +150,17 @@ public class User implements Serializable {
     @Override
     public String toString() {
         return username;
+    }
+
+    public boolean hasRole(String role) {
+        return this.roles.stream().filter(ur -> ur.getRole().equals(role)).count() != 0;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

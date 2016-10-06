@@ -1,8 +1,10 @@
 package com.cookiebutter.Controllers;
 
+import com.cookiebutter.Models.Constants;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -12,8 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/admin")
 public class AdminController {
     @RequestMapping("/")
-    public String index() {
-        return "Hello there!";
+    public String index(Model model) {
+        model.addAttribute("template_name", "admin/index.ftl");
+        return Constants.BASE_LAYOUT;
     }
     @RequestMapping("/user/create")
     public String addUserForm() {

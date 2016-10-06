@@ -28,8 +28,13 @@
                 </div>
                 <div class="col-xs-12">
                     <div class="form-group">
+                        <@spring.bind 'newUser.email'/>
                         <label for="email"><i class="fa fa-key"></i> <@spring.message "user_form_email_msg" /></label>
-                        <input required type="email" class="form-control" name="email" id="email" placeholder="e.g: lrojas@gmail.com">
+                        <input required type="email" class="form-control" name="${spring.status.expression}"
+                               value="${spring.status.value!''?html}" id="email" placeholder="e.g: lrojas@gmail.com">
+                        <#list spring.status.errorMessages as error>
+                            <span class="text-danger">${error}</span>
+                        </#list>
                     </div>
                 </div>
                 <div class="col-xs-12">

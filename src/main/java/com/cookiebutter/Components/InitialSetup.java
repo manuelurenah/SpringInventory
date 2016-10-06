@@ -37,14 +37,20 @@ public class InitialSetup implements ApplicationListener<ContextRefreshedEvent> 
             admin.setRetypePassword("admin");
             admin.setName("Administrator");
             admin.setLastName("Administrator");
-
+            admin.setEmail("admin@mail.com");
             UserRoles adminRole = new UserRoles();
             adminRole.setRole("ROLE_ADMIN");
+            UserRoles userRole = new UserRoles();
+            userRole.setRole("ROLE_USER");
             admin.getRoles().add(adminRole);
+            admin.getRoles().add(userRole);
+
             adminRole.setUser(admin);
+            userRole.setUser(admin);
 
             admin = userService.create(admin);
             adminRole = userRolesService.create(adminRole);
+            userRole = userRolesService.create(userRole);
         }
 
         alreadySetup = true;
