@@ -32,6 +32,7 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-data-jpa')
     compile("org.springframework.boot:spring-boot-devtools")
     compile('org.springframework.boot:spring-boot-starter-web')
+
     //Incluyendo el módulo de seguridad.
 
     compile group: 'org.springframework.security', name: 'spring-security-taglibs'
@@ -56,6 +57,8 @@ dependencies {
 
 
 
+    //Custom Dependencies
+    compile 'com.github.darrachequesne:spring-data-jpa-datatables:2.5'
 
     //Prueba.
     testCompile('org.springframework.boot:spring-boot-starter-test')

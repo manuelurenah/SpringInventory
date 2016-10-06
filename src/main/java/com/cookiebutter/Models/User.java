@@ -1,6 +1,8 @@
 package com.cookiebutter.Models;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.sun.org.apache.xpath.internal.operations.Bool;
+import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
@@ -20,10 +22,12 @@ import java.util.List;
 public class User implements Serializable {
     @Id
     @GeneratedValue
+    @JsonView(DataTablesOutput.View.class)
     private long id;
     @Column
     @NotNull(message = "{user.username_not_empty}")
     @Size(min = 4, message = "{user.username_too_short}")
+    @JsonView(DataTablesOutput.View.class)
     private String username;
     @Column
     @NotNull
@@ -35,6 +39,7 @@ public class User implements Serializable {
     private String name;
     @Column
     @NotNull
+    @JsonView(DataTablesOutput.View.class)
     private String email;
     @Column
     @NotNull

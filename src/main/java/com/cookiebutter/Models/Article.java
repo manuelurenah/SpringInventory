@@ -1,5 +1,8 @@
 package com.cookiebutter.Models;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -15,17 +18,21 @@ public class Article implements Serializable {
 
     @Id
     @GeneratedValue
+    @JsonView(DataTablesOutput.View.class)
     private long id;
     @Column
     @NotNull
+    @JsonView(DataTablesOutput.View.class)
     private String name;
     @Column
     private String description;
     @Column
     @NotNull
+    @JsonView(DataTablesOutput.View.class)
     private int quantity;
     @Column
     @NotNull
+    @JsonView(DataTablesOutput.View.class)
     private double cost;
 
     public Article() {
