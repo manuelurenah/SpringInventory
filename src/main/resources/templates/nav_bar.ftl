@@ -14,7 +14,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-left">
                 <li>
-                    <a href="/article/add"><@spring.message "articles_msg" /></a>
+                    <a href="/article/list"><@spring.message "articles_msg" /></a>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">

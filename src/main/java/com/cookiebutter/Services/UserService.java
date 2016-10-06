@@ -4,11 +4,13 @@ import com.cookiebutter.Models.User;
 import com.cookiebutter.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Created by luis on 04/10/16.
  */
 @Service
+@Transactional
 public class UserService {
     @Autowired
     UserRepository userRepository;

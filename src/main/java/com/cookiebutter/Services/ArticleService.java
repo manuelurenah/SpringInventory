@@ -4,6 +4,9 @@ import com.cookiebutter.Models.Article;
 import com.cookiebutter.Repositories.ArticleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * Created by MEUrena on 10/5/16.
@@ -11,6 +14,7 @@ import org.springframework.stereotype.Service;
  */
 
 @Service
+@Transactional
 public class ArticleService {
 
     @Autowired
@@ -23,6 +27,18 @@ public class ArticleService {
 
     public Article create(Article article) {
         return articleRepository.save(article);
+    }
+
+    public void delete(Article article) {
+        articleRepository.delete(article);
+    }
+
+    public List<Article> listAll() {
+        return (List<Article>) articleRepository.findAll();
+    }
+
+    public long articleCount() {
+        return articleRepository.count();
     }
 
 }
