@@ -29,8 +29,8 @@ public class ArticleService {
         return articleRepository.save(article);
     }
 
-    public void delete(Article article) {
-        articleRepository.delete(article);
+    public void delete(Long id) {
+        articleRepository.delete(id);
     }
 
     public List<Article> listAll() {

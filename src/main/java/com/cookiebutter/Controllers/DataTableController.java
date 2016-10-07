@@ -3,6 +3,7 @@ package com.cookiebutter.Controllers;
 import com.cookiebutter.Models.Article;
 import com.cookiebutter.Models.User;
 import com.cookiebutter.Repositories.ArticleRepository;
+import com.cookiebutter.Repositories.UserRepository;
 import com.cookiebutter.Services.UserService;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class DataTableController {
     @Autowired
     ArticleRepository articleRepository;
     @Autowired
-    UserService userService;
+    UserRepository userRepository;
 
     @JsonView(DataTablesOutput.View.class)
     @RequestMapping(value = "/data/articles", method = RequestMethod.GET)
@@ -34,7 +35,7 @@ public class DataTableController {
     @JsonView(DataTablesOutput.View.class)
     @RequestMapping(value = "/data/users", method = RequestMethod.GET)
     public DataTablesOutput<User> getUsers(@Valid DataTablesInput input) {
-        return userService.findAllDT(input);
+        return userRepository.findAll(input);
     }
 
 }
