@@ -2,12 +2,16 @@ package com.cookiebutter.Models;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.sun.org.apache.xpath.internal.operations.Bool;
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 
+import javax.imageio.ImageIO;
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -57,6 +61,13 @@ public class User implements Serializable {
 
     @Column
     private boolean admin = false;
+    @Column
+    @NotNull
+    private String document = "";
+
+    @Lob
+    @Column(name = "pic")
+    private byte[] picture;
 
 
     public User(){};
@@ -70,6 +81,8 @@ public class User implements Serializable {
         this.admin = user.isAdmin();
         this.roles = user.getRoles();
         this.email = user.getEmail();
+        this.document = user.getDocument();
+        this.picture = user.getPicture();
     }
 
     public long getId() {
@@ -167,5 +180,29 @@ public class User implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getDocument() {
+        return document;
+    }
+
+    public void setDocument(String document) {
+        this.document = document;
+    }
+
+    public byte[] getPicture() {
+        return picture;
+    }
+
+    public void setPicture(byte[] picture) {
+        this.picture = picture;
+    }
+
+    public String getImage() {
+
+        byte[] imgBytesAsBase64 = Base64.encodeBase64(picture);
+        String imgDataAsBase64 = new String(imgBytesAsBase64);
+        String imgAsBase64 = "data:image/png;base64," + imgDataAsBase64;
+        return imgAsBase64;
     }
 }

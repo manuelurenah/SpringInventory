@@ -8,19 +8,25 @@
         </div>
     </#if>
     <div class="row">
-        <div class="col-xs-6">
+        <div class="col-xs-6 col-xs-offset-3 fixed-image">
+            <img class="img img-circle" src="${user.getImage()!"not found..."}"/>
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col-xs-6 text-center">
             <h3><@spring.message "user.view.username_title"></@spring.message></h3>
             <p>${user}</p>
         </div>
-        <div class="col-xs-6">
+        <div class="col-xs-6 text-center">
             <h3><@spring.message "user.view.name_title"></@spring.message></h3>
             <p>${user.getName()} ${user.getLastName()}</p>
         </div>
-        <div class="col-xs-6">
+        <div class="col-xs-6 text-center">
             <h3><@spring.message "user.view.email_title"></@spring.message></h3>
             <p>${user.getEmail()}</p>
         </div>
-        <div class="col-xs-6">
+        <div class="col-xs-6 text-center">
             <h3><@spring.message "user.view.roles_title"></@spring.message></h3>
             <p>
                 <#list user.getRoles() as role>

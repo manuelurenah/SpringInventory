@@ -109,3 +109,14 @@ a.thumbnail{
 .flex{
     display: flex;
 }
+
+
+.fixed-image {
+    text-align: center;
+    overflow: hidden;
+}
+
+.fixed-image img{
+    width: 200px;
+    height: 200px;
+}
