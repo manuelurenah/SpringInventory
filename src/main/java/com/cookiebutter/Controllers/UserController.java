@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.security.Principal;
@@ -62,6 +63,7 @@ public class UserController {
     @PostMapping("/create")
     public String create(@Valid @ModelAttribute(name = "newUser") User user,
                          @Valid BindingResult bindingResult,
+                         @RequestParam("profile_pic") MultipartFile pic,
                          Model model) {
         if(bindingResult.hasErrors()) {
             model.addAttribute("template_name", "user/register.ftl");
@@ -73,6 +75,12 @@ public class UserController {
                 userRole.setRole("ROLE_USER");
                 userRole.setUser(user);
                 user.getRoles().add(userRole);
+                try {
+                    user.setPicture(pic.getBytes());
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
                 userService.create(user);
                 userRolesService.create(userRole);
                 UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(new CustomUserDetails(user), null);

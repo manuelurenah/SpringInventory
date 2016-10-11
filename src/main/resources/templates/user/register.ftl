@@ -11,10 +11,28 @@
     </#if>
     <div class="row">
         <div class="col-xs-12">
-            <form method="post" role="form">
+            <form method="post" role="form" enctype="multipart/form-data">
                 <#--<legend><@spring.message "user_register_title" /></legend>-->
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 <br>
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="picture"><@spring.message "user_form_image_title" /></label>
+                        <input required type="file" accept="image/png" class="form-control" name="profile_pic"
+                               id="picture" placeholder="">
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="document"> <@spring.message "user_form_document" /></label>
+                    <@spring.bind 'newUser.document'/>
+                        <input required type="text" class="form-control" name="${spring.status.expression}"
+                               value="${spring.status.value!''?html}" id="document" placeholder="">
+                    <#list spring.status.errorMessages as error>
+                        <span class="text-danger">${error}</span>
+                    </#list>
+                    </div>
+                </div>
                 <div class="col-xs-12">
                     <div class="form-group">
                         <label for="username"><i class="fa fa-user"></i> <@spring.message "user_form_username_msg" /></label>
