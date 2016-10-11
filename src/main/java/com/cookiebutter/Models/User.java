@@ -55,6 +55,8 @@ public class User implements Serializable {
     private boolean enabled = true;
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<UserRoles> roles = new ArrayList<UserRoles>();
+    @OneToMany(mappedBy = "client", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Invoice> invoices = new ArrayList<>();
     @NotNull
     @Size(min=5, max=30)
     private String retypePassword;
@@ -147,6 +149,14 @@ public class User implements Serializable {
 
     public void setRoles(List<UserRoles> roles) {
         this.roles = roles;
+    }
+
+    public List<Invoice> getInvoices() {
+        return invoices;
+    }
+
+    public void setInvoices(List<Invoice> invoices) {
+        this.invoices = invoices;
     }
 
     public String getRetypePassword() {

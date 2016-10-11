@@ -38,6 +38,8 @@ public class Article implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonView(DataTablesOutput.View.class)
     private Family family;
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Invoice invoice;
     @Lob
     @Column(name = "pic")
     private byte[] picture;
@@ -98,6 +100,14 @@ public class Article implements Serializable {
 
     public void setFamily(Family family) {
         this.family = family;
+    }
+
+    public Invoice getInvoice() {
+        return invoice;
+    }
+
+    public void setInvoice(Invoice invoice) {
+        this.invoice = invoice;
     }
 
     public byte[] getPicture() {
