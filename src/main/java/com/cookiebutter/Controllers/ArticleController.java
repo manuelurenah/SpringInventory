@@ -3,6 +3,7 @@ package com.cookiebutter.Controllers;
 import com.cookiebutter.Models.Article;
 import com.cookiebutter.Models.Constants;
 import com.cookiebutter.Services.ArticleService;
+import com.cookiebutter.Services.FamilyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -18,12 +19,14 @@ import java.util.List;
  * Created by MEUrena on 10/4/16.
  * All rights reserved.
  */
-@Controller
+@RestController
 @RequestMapping("/article")
 public class ArticleController {
 
     @Autowired
     ArticleService articleService;
+    @Autowired
+    FamilyService familyService;
 
     @GetMapping("/list")
     public String articleList(Model model) {
@@ -38,6 +41,7 @@ public class ArticleController {
     @PreAuthorize("hasRole('ROLE_USER')")
     public String addArticle(@ModelAttribute(name = "newArticle") Article article, Model model) {
         model.addAttribute("template_name", "article/add.ftl");
+        model.addAttribute("families", familyService.parentFamilies());
 
         return Constants.BASE_LAYOUT;
     }

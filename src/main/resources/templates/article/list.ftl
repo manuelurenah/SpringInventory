@@ -12,6 +12,7 @@
                 <th><@spring.message "user_form_name_msg" /></th>
                 <th><@spring.message "article_form_quantity_msg" /></th>
                 <th><@spring.message "article_form_cost_msg" /></th>
+                <th><@spring.message "article_form_family_msg" /></th>
                 <th>Action</th>
             </thead>
             <tbody>
@@ -21,6 +22,7 @@
                 <td>${article.getName()}</td>
                 <td>${article.getQuantity()}</td>
                 <td>${article.getCost()}</td>
+                <td>${article.getFamily()}</td>
                 <td>
                     <a href="/article/${article.getId()}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i> <@spring.message "form_edit_msg" /></a>
                     <a href="/article/delete/${article.getId()}" class="btn btn-danger btn-sm"><i class="fa fa-close"></i> <@spring.message "form_delete_msg" /></a>

@@ -35,6 +35,7 @@ public class Article implements Serializable {
     @JsonView(DataTablesOutput.View.class)
     private double cost;
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JsonView(DataTablesOutput.View.class)
     private Family family;
 
     public Article() {

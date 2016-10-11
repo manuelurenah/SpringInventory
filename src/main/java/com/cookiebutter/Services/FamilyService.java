@@ -42,4 +42,12 @@ public class FamilyService {
         return familyRepository.count();
     }
 
+    public List<Family> parentFamilies() {
+        return familyRepository.findAllByParentNull();
+    }
+
+    public List<Family> subfamiliesOfParent(Long id) {
+        return familyRepository.findAllByParentId(id);
+    }
+
 }
