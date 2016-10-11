@@ -45,7 +45,6 @@
                             <@spring.bind 'newArticle.cost'/>
                             <input required type="number" class="form-control" name="${spring.status.expression}"
                                    value="${spring.status.value!''?html}" id="cost" placeholder=""/>
-                            <div class="input-group-addon">.00</div>
                         </div>
                     <#list spring.status.errorMessages as error>
                         <span class="text-danger">${error}</span>
