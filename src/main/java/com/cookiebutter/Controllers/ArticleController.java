@@ -19,7 +19,7 @@ import java.util.List;
  * Created by MEUrena on 10/4/16.
  * All rights reserved.
  */
-@RestController
+@Controller
 @RequestMapping("/article")
 public class ArticleController {
 
