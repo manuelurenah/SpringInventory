@@ -9,6 +9,7 @@
         <table id='article-table' class="table table-responsive table-hover">
             <thead>
                 <th>Id</th>
+                <th><@spring.message "article_form_image_msg" /></th>
                 <th><@spring.message "user_form_name_msg" /></th>
                 <th><@spring.message "article_form_quantity_msg" /></th>
                 <th><@spring.message "article_form_cost_msg" /></th>
@@ -19,6 +20,9 @@
             <#list articles as article>
             <tr>
                 <td>${article.getId()}</td>
+                <td>
+                    <img class="img img-circle" src="${article.getImage()!"not found..."}">
+                </td>
                 <td>${article.getName()}</td>
                 <td>${article.getQuantity()}</td>
                 <td>${article.getCost()}</td>

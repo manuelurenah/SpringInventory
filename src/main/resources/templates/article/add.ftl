@@ -11,7 +11,7 @@
 </#if>
     <div class="row">
         <div class="col-xs-12">
-            <form method="post" role="form">
+            <form method="post" role="form" enctype="multipart/form-data">
             <#--<legend><@spring.message "user_register_title" /></legend>-->
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 <br>
@@ -82,6 +82,13 @@
                         <@spring.bind 'newArticle.description'/>
                         <textarea class="form-control" name="${spring.status.expression}"
                                   id="description" placeholder="">${spring.status.value!''?html}</textarea>
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="picture"><@spring.message "article_form_image_msg" /></label>
+                        <input required type="file" accept="image/png" class="form-control" name="profile_pic"
+                               id="picture" placeholder="">
                     </div>
                 </div>
                 <button type="submit" class="btn btn-info btn-block"><@spring.message "article_form_add_msg" /></button>

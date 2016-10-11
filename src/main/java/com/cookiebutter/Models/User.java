@@ -202,7 +202,6 @@ public class User implements Serializable {
 
         byte[] imgBytesAsBase64 = Base64.encodeBase64(picture);
         String imgDataAsBase64 = new String(imgBytesAsBase64);
-        String imgAsBase64 = "data:image/png;base64," + imgDataAsBase64;
-        return imgAsBase64;
+        return "data:image/png;base64," + imgDataAsBase64;
     }
 }

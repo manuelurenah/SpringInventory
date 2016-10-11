@@ -1,6 +1,7 @@
 package com.cookiebutter.Models;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 
 import javax.persistence.*;
@@ -37,6 +38,9 @@ public class Article implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonView(DataTablesOutput.View.class)
     private Family family;
+    @Lob
+    @Column(name = "pic")
+    private byte[] picture;
 
     public Article() {
     }
@@ -94,6 +98,20 @@ public class Article implements Serializable {
 
     public void setFamily(Family family) {
         this.family = family;
+    }
+
+    public byte[] getPicture() {
+        return picture;
+    }
+
+    public void setPicture(byte[] picture) {
+        this.picture = picture;
+    }
+
+    public String getImage() {
+        byte[] imgBytesAsBase64 = Base64.encodeBase64(picture);
+        String imgDataAsBase64 = new String(imgBytesAsBase64);
+        return "data:image/png;base64," + imgDataAsBase64;
     }
 
     @Override

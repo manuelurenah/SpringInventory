@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -52,6 +53,7 @@ public class ArticleController {
     public String create(@Valid @ModelAttribute(name = "newArticle") Article article,
                          @Valid BindingResult bindingResult,
                          @RequestParam("subfam_id") long familyId,
+                         @RequestParam("profile_pic") MultipartFile pic,
                          Model model) {
         if(bindingResult.hasErrors()) {
             model.addAttribute("template_name", "article/add.ftl");
@@ -62,6 +64,12 @@ public class ArticleController {
             if(!articleService.exists(article.getName())) {
                 Family fam = familyService.getById(familyId);
                 article.setFamily(fam);
+                try {
+                    article.setPicture(pic.getBytes());
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
                 article = articleService.create(article);
                 fam.getArticles().add(article);
                 familyService.create(fam);
