@@ -13,5 +13,6 @@ public interface FamilyRepository extends CrudRepository<Family, Long> {
     Family findByName(String name);
     List<Family> findAllByParentNull();
     List<Family> findAllByParentId(Long id);
+    Family findById(long id);
 
 }

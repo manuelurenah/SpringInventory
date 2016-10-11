@@ -28,4 +28,24 @@ $(document).ready(function() {
             data: 'email'
         }]
     });
+
+    $('#family').change(function(e) {
+        // Fix subfamilies
+        var id = e.target.value;
+        $('#family-placeholder').remove();
+        console.log(id);
+        $.ajax({
+            url: '/family/subfamilies?familyId=' + id,
+            method: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                var html = "";
+                for(var i = 0; i < data.subfamilies.length; i++) {
+                    var elem = data.subfamilies[i];
+                    html+= "<option value='" + elem.id +"'>" + elem.name + "</option>";
+                }
+                $('#subfamilies').html(html);
+            }
+        })
+    });
 });

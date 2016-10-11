@@ -51,13 +51,13 @@
                     </#list>
                     </div>
                 </div>
-                <div class="col-xs-6">
+                <div class="col-xs-12">
                     <div class="form-group">
                         <label for="family"><@spring.message "article_form_family_msg" /></label>
-                        <@spring.bind 'newArticle.family'/>
-                        <select class="form-control" id="family">
+                        <select class="form-control" name="fam_id" id="family" required>
+                            <option id="family-placeholder" disabled selected><@spring.message "article_form_family_placeholder"></@spring.message></option>
                             <#list families as fam>
-                                <option>${fam.getName()}</option>
+                                <option value="${fam.getId()}">${fam.getName()}</option>
                             </#list>
                         </select>
                     <#list spring.status.errorMessages as error>
@@ -65,11 +65,11 @@
                     </#list>
                     </div>
                 </div>
-                <div class="col-xs-6">
+                <div class="col-xs-12">
                     <div class="form-group">
                         <label for="subfamily"><@spring.message "article_form_subfam_msg" /></label>
-                        <select class="form-control" id="subfamily">
-                            <option>Needs Fixes</option>
+                        <select class="form-control" name="subfam_id" id="subfamilies" required>
+                            <option disabled selected><@spring.message "article_form_subfam_placeholder"></@spring.message></option>
                         </select>
                     <#list spring.status.errorMessages as error>
                         <span class="text-danger">${error}</span>

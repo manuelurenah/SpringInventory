@@ -72,6 +72,7 @@ public class InitialSetup implements ApplicationListener<ContextRefreshedEvent> 
             Family fam = new Family();
             fam.setName("Family#" + i);
             List<Family> subfams = new ArrayList<>();
+            fam = familyService.create(fam);
             for (int j = 0; j < 3; j++) {
                 Family subfam = new Family();
                 subfam.setName("Fam#" + i + "_Sub#" + j);

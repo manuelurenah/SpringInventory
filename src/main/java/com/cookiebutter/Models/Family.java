@@ -1,5 +1,7 @@
 package com.cookiebutter.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -23,13 +25,13 @@ public class Family implements Serializable {
     @Column
     @Size(min = 3, max = 25)
     private String name;
-
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Family parent;
 
     @OneToMany(mappedBy = "parent", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Family> subfamilies = new ArrayList<>();
-
+    @JsonIgnore
     @OneToMany(mappedBy = "family", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Article> articles = new ArrayList<>();
 

@@ -50,4 +50,8 @@ public class FamilyService {
         return familyRepository.findAllByParentId(id);
     }
 
+    public Family getById(long id) {
+        return familyRepository.findById(id);
+    }
+
 }

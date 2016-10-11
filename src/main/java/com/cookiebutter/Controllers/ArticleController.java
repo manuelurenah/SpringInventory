@@ -2,6 +2,7 @@ package com.cookiebutter.Controllers;
 
 import com.cookiebutter.Models.Article;
 import com.cookiebutter.Models.Constants;
+import com.cookiebutter.Models.Family;
 import com.cookiebutter.Services.ArticleService;
 import com.cookiebutter.Services.FamilyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,14 +51,20 @@ public class ArticleController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String create(@Valid @ModelAttribute(name = "newArticle") Article article,
                          @Valid BindingResult bindingResult,
+                         @RequestParam("subfam_id") long familyId,
                          Model model) {
         if(bindingResult.hasErrors()) {
             model.addAttribute("template_name", "article/add.ftl");
             return Constants.BASE_LAYOUT;
         }
         else {
+
             if(!articleService.exists(article.getName())) {
-                articleService.create(article);
+                Family fam = familyService.getById(familyId);
+                article.setFamily(fam);
+                article = articleService.create(article);
+                fam.getArticles().add(article);
+                familyService.create(fam);
                 return "redirect:/article/list";
             }
             else {

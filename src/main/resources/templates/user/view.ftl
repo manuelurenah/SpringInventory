@@ -13,6 +13,12 @@
         </div>
     </div>
     <div class="row">
+        <div class="col-xs-6 col-xs-offset-3 text-center">
+            <h3><@spring.message "user_form_document"></@spring.message></h3>
+            <p>${user.getDocument()}</p>
+        </div>
+    </div>
+    <div class="row">
 
         <div class="col-xs-6 text-center">
             <h3><@spring.message "user.view.username_title"></@spring.message></h3>
