@@ -1,5 +1,7 @@
 package com.cookiebutter.Models;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -23,9 +25,9 @@ public class Invoice {
     private Date createdAt;
     @ManyToOne
     private User client;
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "article_id")
-    private List<Article> articles;
+    @OneToMany(mappedBy = "invoice", cascade = CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<ArticleInvoice> articleInvoices;
     @Column
     private float total = 0;
 
@@ -61,14 +63,13 @@ public class Invoice {
         this.client = client;
     }
 
-    public List<Article> getArticles() {
-        return articles;
+    public List<ArticleInvoice> getArticleInvoices() {
+        return articleInvoices;
     }
 
-    public void setArticles(List<Article> articles) {
-        this.articles = articles;
+    public void setArticleInvoices(List<ArticleInvoice> articleInvoices) {
+        this.articleInvoices = articleInvoices;
     }
-
 
     public float getTotal() {
         return total;

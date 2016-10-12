@@ -2,6 +2,8 @@ package com.cookiebutter.Models;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import org.apache.tomcat.util.codec.binary.Base64;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 
 import javax.persistence.*;
@@ -39,9 +41,9 @@ public class Article implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonView(DataTablesOutput.View.class)
     private Family family;
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "article_id")
-    private List<Invoice> invoices;
+    @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<ArticleInvoice> articleInvoices;
     @Lob
     @Column(name = "pic")
     private byte[] picture;
@@ -134,11 +136,12 @@ public class Article implements Serializable {
         this.borroweds = borroweds;
     }
 
-    public List<Invoice> getInvoices() {
-        return invoices;
+
+    public List<ArticleInvoice> getArticleInvoices() {
+        return articleInvoices;
     }
 
-    public void setInvoices(List<Invoice> invoices) {
-        this.invoices = invoices;
+    public void setArticleInvoices(List<ArticleInvoice> articleInvoices) {
+        this.articleInvoices = articleInvoices;
     }
 }
