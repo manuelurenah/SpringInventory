@@ -9,6 +9,7 @@ import com.cookiebutter.Services.UserRolesService;
 import com.cookiebutter.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -56,6 +57,7 @@ public class UserController {
     }
 
     @GetMapping("/create")
+    @Secured({"ROLE_ANONYMOUS"})
     public String createForm(@ModelAttribute(name = "newUser") User user, Model model) {
         model.addAttribute("template_name", "user/register.ftl");
         return Constants.BASE_LAYOUT;
@@ -83,8 +85,8 @@ public class UserController {
                 }
                 userService.create(user);
                 userRolesService.create(userRole);
-                UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(new CustomUserDetails(user), null);
-                SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
+//                UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(new CustomUserDetails(user), null);
+//                SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
 
                 return "redirect:/";
             }

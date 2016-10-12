@@ -209,7 +209,9 @@ public class User implements Serializable {
     }
 
     public String getImage() {
-
+        if(picture == null) {
+            return null;
+        }
         byte[] imgBytesAsBase64 = Base64.encodeBase64(picture);
         String imgDataAsBase64 = new String(imgBytesAsBase64);
         return "data:image/png;base64," + imgDataAsBase64;

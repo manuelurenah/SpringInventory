@@ -7,6 +7,7 @@ import com.cookiebutter.Repositories.UserRolesRepository;
 import com.cookiebutter.Services.FamilyService;
 import com.cookiebutter.Services.UserRolesService;
 import com.cookiebutter.Services.UserService;
+import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
