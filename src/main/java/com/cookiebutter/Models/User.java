@@ -2,6 +2,8 @@ package com.cookiebutter.Models;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import org.apache.tomcat.util.codec.binary.Base64;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 
 import javax.persistence.*;
@@ -49,8 +51,6 @@ public class User implements Serializable {
     private boolean enabled = true;
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<UserRoles> roles = new ArrayList<UserRoles>();
-    @OneToMany(mappedBy = "client", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<Borrowed> invoices = new ArrayList<>();
     @NotNull
     @Size(min=5, max=30)
     private String retypePassword;
@@ -60,10 +60,16 @@ public class User implements Serializable {
     @Column
     @NotNull
     private String document = "";
-
     @Lob
     @Column(name = "pic")
     private byte[] picture;
+
+    @OneToMany(mappedBy = "client")
+    private List<Borrowed> borroweds;
+
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<Invoice> invoices = new ArrayList<>();
 
 
     public User(){};
@@ -145,14 +151,6 @@ public class User implements Serializable {
         this.roles = roles;
     }
 
-    public List<Borrowed> getInvoices() {
-        return invoices;
-    }
-
-    public void setInvoices(List<Borrowed> invoices) {
-        this.invoices = invoices;
-    }
-
     public String getRetypePassword() {
         return retypePassword;
     }
@@ -209,5 +207,17 @@ public class User implements Serializable {
         byte[] imgBytesAsBase64 = Base64.encodeBase64(picture);
         String imgDataAsBase64 = new String(imgBytesAsBase64);
         return "data:image/png;base64," + imgDataAsBase64;
+    }
+
+    public List<Borrowed> getBorroweds() {
+        return borroweds;
+    }
+
+    public void setBorroweds(List<Borrowed> borroweds) {
+        this.borroweds = borroweds;
+    }
+
+    public void setInvoices(List<Invoice> invoices) {
+        this.invoices = invoices;
     }
 }

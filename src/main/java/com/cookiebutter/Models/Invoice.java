@@ -21,10 +21,10 @@ public class Invoice {
     @Column
     @DateTimeFormat
     private Date createdAt;
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne
     private User client;
-    @Column
-    @OneToMany(mappedBy = "invoice", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "article_id")
     private List<Article> articles;
     @Column
     private float total = 0;

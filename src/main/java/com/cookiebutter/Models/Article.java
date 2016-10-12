@@ -7,6 +7,7 @@ import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by MEUrena on 10/4/16.
@@ -38,11 +39,15 @@ public class Article implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonView(DataTablesOutput.View.class)
     private Family family;
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private Borrowed invoice;
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "article_id")
+    private List<Invoice> invoices;
     @Lob
     @Column(name = "pic")
     private byte[] picture;
+
+    @OneToMany(mappedBy = "article")
+    private List<Borrowed> borroweds;
 
     public Article() {
     }
@@ -102,14 +107,6 @@ public class Article implements Serializable {
         this.family = family;
     }
 
-    public Borrowed getInvoice() {
-        return invoice;
-    }
-
-    public void setInvoice(Borrowed invoice) {
-        this.invoice = invoice;
-    }
-
     public byte[] getPicture() {
         return picture;
     }
@@ -127,5 +124,21 @@ public class Article implements Serializable {
     @Override
     public String toString() {
         return name;
+    }
+
+    public List<Borrowed> getBorroweds() {
+        return borroweds;
+    }
+
+    public void setBorroweds(List<Borrowed> borroweds) {
+        this.borroweds = borroweds;
+    }
+
+    public List<Invoice> getInvoices() {
+        return invoices;
+    }
+
+    public void setInvoices(List<Invoice> invoices) {
+        this.invoices = invoices;
     }
 }

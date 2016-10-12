@@ -18,11 +18,9 @@ public class Borrowed {
     @Id
     @GeneratedValue
     private long id;
-    @Column
     @ManyToOne
     private User client;
     @ManyToOne
-    @Column
     private Article article;
     @Column
     private int quantity; //How many items of article were taken.
