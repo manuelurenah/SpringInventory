@@ -7,17 +7,21 @@
             </div>
         </div>
     </#if>
+    <#if user.getImage()?? >
     <div class="row">
         <div class="col-xs-6 col-xs-offset-3 fixed-image">
             <img class="img img-circle" src="${user.getImage()!"not found..."}"/>
         </div>
     </div>
+    </#if>
+    </#if user.getDocument()??>
     <div class="row">
         <div class="col-xs-6 col-xs-offset-3 text-center">
             <h3><@spring.message "user_form_document"></@spring.message></h3>
             <p>${user.getDocument()}</p>
         </div>
     </div>
+    </#if>
     <div class="row">
 
         <div class="col-xs-6 text-center">

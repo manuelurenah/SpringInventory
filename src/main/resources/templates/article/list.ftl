@@ -6,7 +6,7 @@
             </div>
         </div>
         <br />
-        <table id='article-table' class="table table-responsive table-hover">
+        <table id='article-table' class="table table-middle  table-responsive table-hover">
             <thead>
                 <th>Id</th>
                 <th><@spring.message "article_form_image_msg" /></th>
@@ -21,7 +21,7 @@
             <tr>
                 <td>${article.getId()}</td>
                 <td>
-                    <img class="img img-circle" src="${article.getImage()!"not found..."}">
+                    <img class="img img-circle img-table" src="${article.getImage()!"not found..."}">
                 </td>
                 <td>${article.getName()}</td>
                 <td>${article.getQuantity()}</td>
