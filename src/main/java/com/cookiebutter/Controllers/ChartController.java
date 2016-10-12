@@ -20,7 +20,7 @@ public class ChartController {
     @Autowired
     ArticleService articleService;
 
-    @RequestMapping(value = "/chart/data", method = RequestMethod.POST)
+    @RequestMapping(value = "/chart/data", method = RequestMethod.GET)
     public List<Article> renderChart() {
         return articleService.listAll();
     }

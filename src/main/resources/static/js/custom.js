@@ -14,7 +14,8 @@ var CHART_DATA = {
             success: function (articleJsonData) {
                 console.log(articleJsonData);
                 $.each(articleJsonData, function (index, article) {
-                    formattedArticleArray.push(article.family.name);
+                    // This is for test purposes
+                    formattedArticleArray.push(article.quantity);
                 });
             }
         });
@@ -24,30 +25,37 @@ var CHART_DATA = {
         console.log(jsonData);
 
         return {
-            labels: ["Family"],
-            datasets: [
-                {
-                    fillColor : "rgba(255,0,0,0.3)",
-
-                    strokeColor : "rgba(0,255,0,1)",
-
-                    pointColor : "rgba(0,0,255,1)",
-
-                    pointStrokeColor : "rgba(0,0,255,1)",
-
-                    /*As Ajax response data is a multidimensional array, we have 'article' data in 0th position*/
-                    data : jsonData[0]
-                }
-            ]
+            labels: ['Quantity'],
+            datasets: [{
+                label: 'Test Chart',
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)'
+                ],
+                borderWidth: 1,
+                /*As Ajax response data is a multidimensional array, we have 'article' data in 0th position*/
+                data : jsonData[0]
+            }]
         };
     },
     renderArticleBarChart: function (barChartData) {
-        var context = $('#report_chart');
-        var barChart = new Chart(context)
-            .Bar(barChartData, {
-                scaleShowLabels: false,
-                pointLabelFontSize: 10
-            });
+        var context = document.getElementById("report_chart").getContext("2d");
+        var barChart = new Chart(context, {
+            type: 'bar',
+            data: barChartData,
+            options: {
+                scales: {
+                    xAxes: [{
+                        stacked: true
+                    }],
+                    yAxes: [{
+                        stacked: true
+                    }]
+                }
+            }
+        });
 
         return barChart;
     },

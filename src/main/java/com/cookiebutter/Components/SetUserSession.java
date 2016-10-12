@@ -37,9 +37,11 @@ public class SetUserSession extends HandlerInterceptorAdapter {
         }
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if(authentication.isAuthenticated() && !authentication.getPrincipal().equals("anonymousUser")) {
+        if(authentication!= null && authentication.isAuthenticated() && !authentication.getPrincipal().equals("anonymousUser")) {
             CustomUserDetails customUserDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            modelAndView.getModel().put("currentUser", customUserDetails);
+            if (modelAndView != null) {
+                modelAndView.getModel().put("currentUser", customUserDetails);
+            }
         }
     }
 }
