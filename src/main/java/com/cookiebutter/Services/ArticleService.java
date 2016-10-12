@@ -41,4 +41,8 @@ public class ArticleService {
         return articleRepository.count();
     }
 
+    public Article findById(long id) {
+        return articleRepository.findById(id);
+    }
+
 }

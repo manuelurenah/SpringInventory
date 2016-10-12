@@ -28,8 +28,14 @@
                 <td>${article.getCost()}</td>
                 <td>${article.getFamily()}</td>
                 <td>
-                    <a href="/article/${article.getId()}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i> <@spring.message "form_edit_msg" /></a>
-                    <a href="/article/delete/${article.getId()}" class="btn btn-danger btn-sm"><i class="fa fa-close"></i> <@spring.message "form_delete_msg" /></a>
+                    <#if currentUser?? && currentUser.hasRole("ROLE_USER")>
+                        <a href="/article/borrow/${article.getId()}" class="btn btn-success btn-sm"><@spring.message "article_borrow_button_title" /></a>
+                    </#if>
+                    <#if currentUser?? && currentUser.hasRole("ROLE_ADMIN")>
+                        <a href="/article/${article.getId()}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i> <@spring.message "form_edit_msg" /></a>
+                        <a href="/article/delete/${article.getId()}" class="btn btn-danger btn-sm"><i class="fa fa-close"></i> <@spring.message "form_delete_msg" /></a>
+                    </#if>
+
                 </td>
             </tr>
             </#list>

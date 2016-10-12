@@ -1,10 +1,10 @@
 package com.cookiebutter.Controllers;
 
-import com.cookiebutter.Models.Article;
-import com.cookiebutter.Models.Constants;
-import com.cookiebutter.Models.Family;
+import com.cookiebutter.Models.*;
 import com.cookiebutter.Services.ArticleService;
 import com.cookiebutter.Services.FamilyService;
+import com.cookiebutter.Services.UserService;
+import jdk.nashorn.internal.runtime.regexp.joni.ast.ConsAltNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.security.Principal;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -29,6 +31,8 @@ public class ArticleController {
     ArticleService articleService;
     @Autowired
     FamilyService familyService;
+    @Autowired
+    UserService userService;
 
     @GetMapping("/list")
     public String articleList(Model model) {
@@ -84,9 +88,45 @@ public class ArticleController {
     }
 
     @GetMapping("/delete/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String deleteArticle(@PathVariable String id) {
         Long parseId = Long.parseLong(id);
         articleService.delete(parseId);
+        return "redirect:/article/list";
+    }
+
+    @GetMapping("/borrow/{id}")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public String borrowArticle(@PathVariable long id,
+                                Model model) {
+        Article article = articleService.findById(id);
+        model.addAttribute("article", article);
+        model.addAttribute("template_name", "article/borrow.ftl");
+        return Constants.BASE_LAYOUT;
+    }
+
+    @PostMapping("/borrow/{id}")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public String borrowArticleSave(@PathVariable long id,
+                                    Model model,
+                                    Principal principal,
+                                    @RequestParam("toDate") Date date,
+                                    @RequestParam("quantity") int quantity){
+        Article article = articleService.findById(id);
+        User user = userService.findByUsername(principal.getName());
+        Borrowed borrowed = new Borrowed();
+        borrowed.setArticle(article);
+        borrowed.setClient(user);
+        borrowed.setReturnDate(date);
+        borrowed.setQuantity(quantity);
+        borrowed.setTakenOn(new Date());
+        // TODO: Create service to save borrowed.
+        // borrowedService.create(borrowed);
+        article.getBorroweds().add(borrowed);
+        user.getBorroweds().add(borrowed);
+        articleService.create(article);
+        userService.save(user);
+
         return "redirect:/article/list";
     }
 }

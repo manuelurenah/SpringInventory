@@ -10,6 +10,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by MEUrena on 10/4/16.
@@ -28,7 +29,7 @@ public class Article implements Serializable {
     @NotNull
     @JsonView(DataTablesOutput.View.class)
     private String name;
-    @Column
+    @Column(length = 1500)
     private String description;
     @Column
     @NotNull
@@ -143,5 +144,15 @@ public class Article implements Serializable {
 
     public void setArticleInvoices(List<ArticleInvoice> articleInvoices) {
         this.articleInvoices = articleInvoices;
+    }
+
+    public int getRemainingQuantity() {
+        Optional<Integer> alreadyInUse = this.borroweds.stream().map(borrowed -> getQuantity()).reduce((integer, integer2) -> integer+integer2);
+        if(alreadyInUse.isPresent()){
+            return quantity-alreadyInUse.get();
+        }
+        else {
+            return quantity;
+        }
     }
 }

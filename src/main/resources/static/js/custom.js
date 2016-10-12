@@ -29,6 +29,8 @@ $(document).ready(function() {
         }]
     });
 
+    $('.datepicker').datepicker();
+
     $('#family').change(function(e) {
         // Fix subfamilies
         var id = e.target.value;

@@ -31,6 +31,11 @@ public class SetUserSession extends HandlerInterceptorAdapter {
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+        super.postHandle(request, response, handler, modelAndView);
+        if(modelAndView == null) {
+            return;
+        }
+
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if(authentication.isAuthenticated() && !authentication.getPrincipal().equals("anonymousUser")) {
             CustomUserDetails customUserDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

@@ -12,5 +12,5 @@ import java.util.List;
  */
 public interface ArticleRepository extends DataTablesRepository<Article, Long> {
     Article findByName(String name);
-
+    Article findById(long id);
 }
