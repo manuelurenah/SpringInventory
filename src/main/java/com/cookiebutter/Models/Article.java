@@ -39,7 +39,7 @@ public class Article implements Serializable {
     @JsonView(DataTablesOutput.View.class)
     private Family family;
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private Invoice invoice;
+    private Borrowed invoice;
     @Lob
     @Column(name = "pic")
     private byte[] picture;
@@ -102,11 +102,11 @@ public class Article implements Serializable {
         this.family = family;
     }
 
-    public Invoice getInvoice() {
+    public Borrowed getInvoice() {
         return invoice;
     }
 
-    public void setInvoice(Invoice invoice) {
+    public void setInvoice(Borrowed invoice) {
         this.invoice = invoice;
     }
 

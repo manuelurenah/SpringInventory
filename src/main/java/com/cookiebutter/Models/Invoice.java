@@ -24,10 +24,10 @@ public class Invoice {
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private User client;
     @Column
-    @DateTimeFormat
-    private Date returnDate;
     @OneToMany(mappedBy = "invoice", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Article> articles;
+    @Column
+    private float total = 0;
 
     public Invoice() {
     }
@@ -35,7 +35,6 @@ public class Invoice {
     public Invoice(Date createdAt, User client, Date returnDate) {
         this.createdAt = createdAt;
         this.client = client;
-        this.returnDate = returnDate;
     }
 
     public long getId() {
@@ -62,19 +61,20 @@ public class Invoice {
         this.client = client;
     }
 
-    public Date getReturnDate() {
-        return returnDate;
-    }
-
-    public void setReturnDate(Date returnDate) {
-        this.returnDate = returnDate;
-    }
-
     public List<Article> getArticles() {
         return articles;
     }
 
     public void setArticles(List<Article> articles) {
         this.articles = articles;
+    }
+
+
+    public float getTotal() {
+        return total;
+    }
+
+    public void setTotal(float total) {
+        this.total = total;
     }
 }

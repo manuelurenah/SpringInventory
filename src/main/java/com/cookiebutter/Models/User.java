@@ -1,20 +1,14 @@
 package com.cookiebutter.Models;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 
-import javax.imageio.ImageIO;
 import javax.persistence.*;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -56,7 +50,7 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<UserRoles> roles = new ArrayList<UserRoles>();
     @OneToMany(mappedBy = "client", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<Invoice> invoices = new ArrayList<>();
+    private List<Borrowed> invoices = new ArrayList<>();
     @NotNull
     @Size(min=5, max=30)
     private String retypePassword;
@@ -151,11 +145,11 @@ public class User implements Serializable {
         this.roles = roles;
     }
 
-    public List<Invoice> getInvoices() {
+    public List<Borrowed> getInvoices() {
         return invoices;
     }
 
-    public void setInvoices(List<Invoice> invoices) {
+    public void setInvoices(List<Borrowed> invoices) {
         this.invoices = invoices;
     }
 
