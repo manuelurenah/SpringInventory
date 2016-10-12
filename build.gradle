@@ -34,7 +34,6 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-web')
 
     //Incluyendo el módulo de seguridad.
-
     compile group: 'org.springframework.security', name: 'spring-security-taglibs'
     compile('org.springframework.boot:spring-boot-starter-security')
 
@@ -50,15 +49,12 @@ dependencies {
     compile 'org.webjars:jquery:3.1.0'
     compile 'org.webjars:font-awesome:4.6.3'
     compile 'org.webjars:datatables:1.10.12'
-// https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
-    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.4'
-// https://mvnrepository.com/artifact/javax.servlet.jsp/jsp-api
-    compile group: 'javax.servlet.jsp', name: 'jsp-api', version: '2.2.1-b03'
-
-
+    compile 'org.webjars:chartjs:2.1.3'
 
     //Custom Dependencies
     compile 'com.github.darrachequesne:spring-data-jpa-datatables:2.5'
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.4'
+    compile group: 'javax.servlet.jsp', name: 'jsp-api', version: '2.2.1-b03'
 
     //Prueba.
     testCompile('org.springframework.boot:spring-boot-starter-test')

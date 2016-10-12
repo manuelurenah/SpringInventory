@@ -7,6 +7,7 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
@@ -29,5 +30,12 @@ public class AdminController {
     @RequestMapping("/user/create")
     public String addUserForm() {
         return "Add me now :)";
+    }
+
+    @GetMapping("/reports")
+    public String viewReports(Model model) {
+        model.addAttribute("template_name", "admin/reports.ftl");
+
+        return Constants.BASE_LAYOUT;
     }
 }
