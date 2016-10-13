@@ -147,12 +147,7 @@ public class Article implements Serializable {
     }
 
     public int getRemainingQuantity() {
-        Optional<Integer> alreadyInUse = this.borroweds.stream().map(borrowed -> getQuantity()).reduce((integer, integer2) -> integer+integer2);
-        if(alreadyInUse.isPresent()){
-            return quantity-alreadyInUse.get();
-        }
-        else {
-            return quantity;
-        }
+        int alreadyInUse = this.borroweds.stream().mapToInt(Borrowed::getQuantity).sum();
+        return quantity-alreadyInUse;
     }
 }

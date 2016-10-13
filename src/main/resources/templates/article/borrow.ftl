@@ -4,9 +4,11 @@
             <h3 class="text-center">${article.getName()}</h3>
         </div>
         <div class="row">
-            <div class="col-xs-12 text-center">
-                <img class='img-circle img-responsive fixed-image' src="${article.getImage()!"not_found"}"/>
+            <div class="col-xs-6 col-xs-offset-3 fixed-image">
+                <img class='img-circle' src="${article.getImage()!"not_found"}"/>
             </div>
+        </div>
+        <div class="row">
             <br>
             <div class="col-xs-12">
                 <p>${article.getDescription()}</p>

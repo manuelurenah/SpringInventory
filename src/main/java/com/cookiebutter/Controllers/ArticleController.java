@@ -2,6 +2,7 @@ package com.cookiebutter.Controllers;
 
 import com.cookiebutter.Models.*;
 import com.cookiebutter.Services.ArticleService;
+import com.cookiebutter.Services.BorrowedService;
 import com.cookiebutter.Services.FamilyService;
 import com.cookiebutter.Services.UserService;
 import jdk.nashorn.internal.runtime.regexp.joni.ast.ConsAltNode;
@@ -33,6 +34,8 @@ public class ArticleController {
     FamilyService familyService;
     @Autowired
     UserService userService;
+    @Autowired
+    BorrowedService borrowedService;
 
     @GetMapping("/list")
     public String articleList(Model model) {
@@ -121,7 +124,7 @@ public class ArticleController {
         borrowed.setQuantity(quantity);
         borrowed.setTakenOn(new Date());
         // TODO: Create service to save borrowed.
-        // borrowedService.create(borrowed);
+        borrowedService.create(borrowed);
         article.getBorroweds().add(borrowed);
         user.getBorroweds().add(borrowed);
         articleService.create(article);
