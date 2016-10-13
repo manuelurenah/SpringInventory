@@ -22,11 +22,11 @@ public class Borrowed implements Serializable {
     @GeneratedValue
     @JsonView(DataTablesOutput.View.class)
     private long id;
-    @JsonView(DataTablesOutput.View.class)
     @ManyToOne
+    @JsonView(DataTablesOutput.View.class)
     private User client;
-    @JsonView(DataTablesOutput.View.class)
     @ManyToOne
+    @JsonView(DataTablesOutput.View.class)
     private Article article;
     @Column
     private int quantity; //How many items of article were taken.

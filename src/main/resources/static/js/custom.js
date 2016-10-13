@@ -95,6 +95,7 @@ $(document).ready(function() {
     var rentedTable = $('table#rented-table').DataTable({
         'ajax': '/data/borrowed_articles',
         'serverSide': true,
+        'order': [[3, 'asc']],
         columns: [{
             data: 'id'
         }, {
@@ -105,8 +106,6 @@ $(document).ready(function() {
             data: 'takenOn'
         }]
     });
-
-    console.log(rentedTable.data());
 
     $('.datepicker').datepicker();
 
