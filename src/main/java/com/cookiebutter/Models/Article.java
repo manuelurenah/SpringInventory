@@ -1,5 +1,6 @@
 package com.cookiebutter.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.hibernate.annotations.LazyCollection;
@@ -44,12 +45,15 @@ public class Article implements Serializable {
     private Family family;
     @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.FALSE)
+    @JsonIgnore
     private List<ArticleInvoice> articleInvoices;
     @Lob
     @Column(name = "pic")
+    @JsonIgnore
     private byte[] picture;
 
     @OneToMany(mappedBy = "article")
+    @JsonIgnore
     private List<Borrowed> borroweds;
 
     public Article() {
@@ -117,7 +121,7 @@ public class Article implements Serializable {
     public void setPicture(byte[] picture) {
         this.picture = picture;
     }
-
+    @JsonIgnore
     public String getImage() {
         byte[] imgBytesAsBase64 = Base64.encodeBase64(picture);
         String imgDataAsBase64 = new String(imgBytesAsBase64);

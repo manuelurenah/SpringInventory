@@ -45,4 +45,8 @@ public class ArticleService {
         return articleRepository.findById(id);
     }
 
+    public List<Object> getBorrowedByFamily() {
+        return articleRepository.getBorrowedByFamily();
+    }
+
 }

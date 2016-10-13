@@ -1,6 +1,5 @@
 package com.cookiebutter.Controllers;
 
-import com.cookiebutter.Models.Article;
 import com.cookiebutter.Services.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,9 +19,9 @@ public class ChartController {
     @Autowired
     ArticleService articleService;
 
-    @RequestMapping(value = "/chart/data", method = RequestMethod.GET)
-    public List<Article> renderChart() {
-        return articleService.listAll();
+    @RequestMapping(value = "/chart/general_family", method = RequestMethod.GET)
+    public List<Object> renderChart() {
+        return articleService.getBorrowedByFamily();
     }
 
 }

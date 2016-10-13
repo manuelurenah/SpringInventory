@@ -5,64 +5,60 @@
 // Chart Implementation
 
 var CHART_DATA = {
-    loadArticleData: function () {
-        var formattedArticleArray = [];
+    loadGeneralFamilyData: function () {
+        var formattedArticleArray = {};
         $.ajax({
             async: false,
-            url: '/chart/data',
+            url: '/chart/general_family',
             dataType: 'json',
-            success: function (articleJsonData) {
-                console.log(articleJsonData);
-                $.each(articleJsonData, function (index, article) {
+            success: function (familyInfo) {
+                var labels = [];
+                var datasetData = [];
+                $.each(familyInfo, function (index, data) {
                     // This is for test purposes
-                    formattedArticleArray.push(article.quantity);
+                    labels.push(data[0]);
+                    datasetData.push(data[1]);
                 });
+
+                var datasets = [
+                    {
+                        data: datasetData,
+                        backgroundColor: [
+                            "#FF6384",
+                            "#36A2EB",
+                            "#FFCE56"
+                        ],
+                        hoverBackgroundColor: [
+                            "#FF6384",
+                            "#36A2EB",
+                            "#FFCE56"
+                        ]
+                    }];
+
+                formattedArticleArray = {
+                    datasets: datasets,
+                    labels: labels
+                }
+            },
+            error: function(error) {
+                console.log(error);
             }
         });
         return formattedArticleArray;
     },
-    createChartData: function (jsonData) {
-        console.log(jsonData);
-
-        return {
-            labels: ['Quantity'],
-            datasets: [{
-                label: 'Test Chart',
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)'
-                ],
-                borderWidth: 1,
-                /*As Ajax response data is a multidimensional array, we have 'article' data in 0th position*/
-                data : jsonData[0]
-            }]
-        };
-    },
-    renderArticleBarChart: function (barChartData) {
+    renderGeneralFamilyChart: function (pieChartData) {
         var context = document.getElementById("report_chart").getContext("2d");
-        var barChart = new Chart(context, {
-            type: 'bar',
-            data: barChartData,
-            options: {
-                scales: {
-                    xAxes: [{
-                        stacked: true
-                    }],
-                    yAxes: [{
-                        stacked: true
-                    }]
-                }
-            }
+        console.log(pieChartData);
+        var pieChart = new Chart(context, {
+            type: 'pie',
+            data: pieChartData,
         });
 
-        return barChart;
+        return pieChart;
     },
     initBarChart: function () {
-        var articleData = CHART_DATA.loadArticleData();
-        chartData = CHART_DATA.createChartData(articleData);
-        barChartObj = CHART_DATA.renderArticleBarChart(chartData);
+        var chartData = CHART_DATA.loadGeneralFamilyData();
+        generalFamilyChart = CHART_DATA.renderGeneralFamilyChart(chartData);
     }
 };
 
