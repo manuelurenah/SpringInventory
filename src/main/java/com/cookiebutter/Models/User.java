@@ -217,6 +217,10 @@ public class User implements Serializable {
         this.borroweds = borroweds;
     }
 
+    public List<Invoice> getInvoices() {
+        return invoices;
+    }
+
     public void setInvoices(List<Invoice> invoices) {
         this.invoices = invoices;
     }

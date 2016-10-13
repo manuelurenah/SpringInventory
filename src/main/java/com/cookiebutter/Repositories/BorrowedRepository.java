@@ -11,4 +11,5 @@ public interface BorrowedRepository extends DataTablesRepository<Borrowed, Long>
     Borrowed findByArticleId(long articleId);
     Borrowed findByClientId(long clientId);
     Borrowed findByClientIdAndArticleId(long clientId, long articleId);
+    Borrowed findById(long id);
 }

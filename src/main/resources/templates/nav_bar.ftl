@@ -32,6 +32,9 @@
                 <li>
                     <a href="/user/view/${currentUser}"><@spring.message "profile_msg" /></a>
                 </li>
+                <li>
+                    <a href="/invoice/return"><@spring.message "return_label" /></a>
+                </li>
 
                 <#if currentUser.hasRole("ROLE_ADMIN")>
                     <li>

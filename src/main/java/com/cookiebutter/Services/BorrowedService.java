@@ -32,4 +32,8 @@ public class BorrowedService {
     public Borrowed isBorrowedByClient(User client, Article article) {
         return borrowedRepository.findByClientIdAndArticleId(client.getId(), article.getId());
     }
+
+    public Borrowed getById(long id) {
+        return borrowedRepository.findById(id);
+    }
 }

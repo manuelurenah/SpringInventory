@@ -5,6 +5,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -27,9 +28,7 @@ public class Invoice {
     private User client;
     @OneToMany(mappedBy = "invoice", cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.FALSE)
-    private List<ArticleInvoice> articleInvoices;
-    @Column
-    private float total = 0;
+    private List<ArticleInvoice> articleInvoices = new ArrayList<>();
 
     public Invoice() {
     }
@@ -71,11 +70,11 @@ public class Invoice {
         this.articleInvoices = articleInvoices;
     }
 
-    public float getTotal() {
-        return total;
+    public double getTotal() {
+        return articleInvoices.stream().mapToDouble(articleInvoices -> articleInvoices.getQuantity() * articleInvoices.getArticle().getCost() * articleInvoices.getDays()).sum();
     }
 
-    public void setTotal(float total) {
-        this.total = total;
+    public int countArticles(){
+        return articleInvoices.stream().mapToInt(articleInvoices -> articleInvoices.getQuantity()).sum();
     }
 }

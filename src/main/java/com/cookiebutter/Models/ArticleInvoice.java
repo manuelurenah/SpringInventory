@@ -13,15 +13,19 @@ import java.io.Serializable;
 @Table(name = "article_invoice")
 public class ArticleInvoice implements Serializable {
     @Id
+    @GeneratedValue
+    private long id;
     @ManyToOne(cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.FALSE)
     private Article article;
-    @Id
+
     @ManyToOne(cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.FALSE)
     private Invoice invoice;
     @Column
     private int quantity;
+    @Column
+    private int days;
 
     public ArticleInvoice(){}
 
@@ -48,5 +52,21 @@ public class ArticleInvoice implements Serializable {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public int getDays() {
+        return days;
+    }
+
+    public void setDays(int days) {
+        this.days = days;
     }
 }

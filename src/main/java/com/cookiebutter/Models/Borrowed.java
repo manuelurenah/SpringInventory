@@ -31,6 +31,11 @@ public class Borrowed {
     @DateTimeFormat
     private Date returnDate;
 
+    @OneToMany(mappedBy = "borrowed")
+    private List<Returned> returns;
+    @Column
+    private boolean active = true;
+
     public Borrowed() {}
 
     public Borrowed(Borrowed borrowed) {
@@ -74,7 +79,11 @@ public class Borrowed {
     }
 
     public int getQuantity() {
-        return quantity;
+        int returned = returns.stream().mapToInt(Returned::getReturned).sum();
+        if(quantity-returned == 0) {
+            active = false;
+        }
+        return quantity - returned;
     }
 
     public void setQuantity(int quantity) {
@@ -95,5 +104,21 @@ public class Borrowed {
 
     public void setReturnDate(Date returnDate) {
         this.returnDate = returnDate;
+    }
+
+    public List<Returned> getReturns() {
+        return returns;
+    }
+
+    public void setReturns(List<Returned> returns) {
+        this.returns = returns;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

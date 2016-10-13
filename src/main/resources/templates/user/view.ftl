@@ -14,7 +14,7 @@
         </div>
     </div>
     </#if>
-    </#if user.getDocument()??>
+    <#if user.getDocument()??>
     <div class="row">
         <div class="col-xs-6 col-xs-offset-3 text-center">
             <h3><@spring.message "user_form_document"></@spring.message></h3>
@@ -45,6 +45,30 @@
                 </#list>
             </p>
         </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <h3><@spring.message "invoice"></@spring.message></h3>
+            <table class="table table-responsive table-hover table-middle">
+                <thead>
+                <th>ID</th>
+                <th><@spring.message "created_on"></@spring.message></th>
+                <th><@spring.message "articles_msg"></@spring.message> <@spring.message "article_form_quantity_msg"></@spring.message></th>
+                <th>Total</th>
+                </thead>
+                <tbody>
+                    <#list user.getInvoices() as iv>
+                        <tr>
+                            <td>${iv.getId()}</td>
+                            <td>${iv.getCreatedAt()}</td>
+                            <td>${iv.countArticles()}</td>
+                            <td>${iv.getTotal()}</td>
+                        </tr>
+                    </#list>
+                </tbody>
+            </table>
+        </div>
+
     </div>
 </div>
 <#else>
