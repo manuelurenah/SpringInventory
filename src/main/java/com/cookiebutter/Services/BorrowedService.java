@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * Created by luis on 12/10/16.
  */
@@ -35,5 +37,9 @@ public class BorrowedService {
 
     public Borrowed getById(long id) {
         return borrowedRepository.findById(id);
+    }
+
+    public List<Borrowed> findAll() {
+        return (List<Borrowed>) borrowedRepository.findAll();
     }
 }

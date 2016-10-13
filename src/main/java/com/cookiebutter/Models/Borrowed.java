@@ -1,8 +1,11 @@
 package com.cookiebutter.Models;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -13,19 +16,23 @@ import java.util.List;
 
 @Entity
 @Table(name = "borrowed")
-public class Borrowed {
+public class Borrowed implements Serializable {
 
     @Id
     @GeneratedValue
+    @JsonView(DataTablesOutput.View.class)
     private long id;
     @ManyToOne
+    @JsonView(DataTablesOutput.View.class)
     private User client;
     @ManyToOne
+    @JsonView(DataTablesOutput.View.class)
     private Article article;
     @Column
     private int quantity; //How many items of article were taken.
     @Column
     @DateTimeFormat
+    @JsonView(DataTablesOutput.View.class)
     private Date takenOn;
     @Column
     @DateTimeFormat

@@ -1,11 +1,11 @@
 <div class="container">
     <div class="row">
-        <h2>Admin Site.</h2>
-        <h4>This site is still under development...</h4>
-        <div class="col-xs-2">
-            <a class="btn btn-primary" style="{width: 100%}" href="/admin/reports"><@spring.message "admin_view_reports" /></a>
+        <div class="col-xs-4">
+            <a class="btn btn-primary btn-lg" href="/admin/reports"><@spring.message "admin_view_reports" /></a>
+            <a class="btn btn-info btn-lg" href="/admin/to_be_returned"><@spring.message "admin_to_be_returned" /></a>
         </div>
     </div>
+    <br />
     <div class="row">
         <table id='user-table' class="table table-responsive table-hover">
             <thead>
