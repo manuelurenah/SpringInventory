@@ -81,7 +81,7 @@ $(document).ready(function() {
             data: 'cost'
         }]
     });
-    var userTable = $('#user-table').DataTable({
+    var userTable = $('table#user-table').DataTable({
         'ajax': '/data/users',
         'serverSide': true,
         columns: [{
@@ -92,6 +92,21 @@ $(document).ready(function() {
             data: 'email'
         }]
     });
+    var rentedTable = $('table#rented-table').DataTable({
+        'ajax': '/data/borrowed_articles',
+        'serverSide': true,
+        columns: [{
+            data: 'id'
+        }, {
+            data: 'article.name'
+        }, {
+            data: 'client.username'
+        }, {
+            data: 'takenOn'
+        }]
+    });
+
+    console.log(rentedTable.data());
 
     $('.datepicker').datepicker();
 
