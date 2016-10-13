@@ -45,7 +45,12 @@ public class DataTableController {
     @JsonView(DataTablesOutput.View.class)
     @RequestMapping(value = "/data/borrowed_articles", method = RequestMethod.GET)
     public DataTablesOutput<Borrowed> getBorrowedArticles(@Valid DataTablesInput input) {
-        return borrowedRepository.findAll(input);
+        DataTablesOutput<Borrowed> b =  borrowedRepository.findAll(input, (root, query, cb) -> {
+            Object x = root.get("active");
+            System.out.println(x);
+            return cb.isTrue(root.get("active"));
+        });
+        return b;
     }
 
 }

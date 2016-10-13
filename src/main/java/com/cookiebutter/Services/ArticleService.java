@@ -1,6 +1,7 @@
 package com.cookiebutter.Services;
 
 import com.cookiebutter.Models.Article;
+import com.cookiebutter.Models.Family;
 import com.cookiebutter.Repositories.ArticleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,6 +48,9 @@ public class ArticleService {
 
     public List<Object> getBorrowedByFamily() {
         return articleRepository.getBorrowedByFamily();
+    }
+    public List<Object> getBorrowedByParentFamily(Family family) {
+        return articleRepository.getBorrowedByParentFamily(family);
     }
 
 }

@@ -2,7 +2,9 @@ package com.cookiebutter.Controllers;
 
 import com.cookiebutter.Models.Borrowed;
 import com.cookiebutter.Models.Constants;
+import com.cookiebutter.Models.Family;
 import com.cookiebutter.Services.BorrowedService;
+import com.cookiebutter.Services.FamilyService;
 import com.cookiebutter.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
@@ -25,6 +27,8 @@ public class AdminController {
     UserService userService;
     @Autowired
     BorrowedService borrowedService;
+    @Autowired
+    FamilyService familyService;
 
     @RequestMapping("/")
     public String index(Model model) {
@@ -40,7 +44,8 @@ public class AdminController {
     @GetMapping("/reports")
     public String viewReports(Model model) {
         model.addAttribute("template_name", "admin/reports.ftl");
-
+        List<Family> parentFamilies = familyService.parentFamilies();
+        model.addAttribute("parentFamilies", parentFamilies);
         return Constants.BASE_LAYOUT;
     }
 
@@ -49,7 +54,6 @@ public class AdminController {
         List<Borrowed> borrowed_articles = borrowedService.findAll();
         model.addAttribute("borrowed_articles", borrowed_articles);
         model.addAttribute("template_name", "admin/to_be_returned.ftl");
-
         return Constants.BASE_LAYOUT;
     }
 }
